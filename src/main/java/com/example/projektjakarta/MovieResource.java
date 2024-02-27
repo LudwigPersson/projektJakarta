@@ -2,6 +2,7 @@ package com.example.projektjakarta;
 
 import com.example.dto.MovieDto;
 import com.example.dto.Movies;
+import com.example.entity.Movie;
 import com.example.repository.MovieRepository;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -48,8 +49,17 @@ public class MovieResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(@Valid MovieDto movieDto) {
         var movie = movieRepository.add(MovieDto.map(movieDto));
-        return Response.created(URI.create("movies/" + movie.getId().toString())).build();
+        return Response.created(URI.create("movies/" + movie.getUuid().toString())).build();
     }
-
-
+    @DELETE
+    @Path("/{uuid}")
+    public Response delete(@PathParam("uuid") UUID uuid) {
+        Response movie = movieRepository.deleteByUuid(uuid);
+        if (!movie.equals(uuid)){
+            throw new NotFoundException("UUID not valid " + uuid);
+        }
+        return Response.ok("Successfully deleted").build();
+    }
 }
+
+
