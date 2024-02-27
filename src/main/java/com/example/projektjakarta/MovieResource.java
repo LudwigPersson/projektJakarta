@@ -37,16 +37,16 @@ public class MovieResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{uuid}")
-    public MovieDto one(@PathParam("uuid") UUID uuid){
+    public MovieDto one(@PathParam("uuid") UUID uuid) {
         var movie = movieRepository.findByUuid(uuid);
-        if( movie == null)
+        if (movie == null)
             throw new NotFoundException("Invalid id " + uuid);
         return MovieDto.map(movie);
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(@Valid MovieDto movieDto){
+    public Response create(@Valid MovieDto movieDto) {
         var movie = movieRepository.add(MovieDto.map(movieDto));
         return Response.created(URI.create("movies/" + movie.getId().toString())).build();
     }
