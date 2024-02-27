@@ -45,10 +45,10 @@ public class MovieResource {
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response create(@Valid MovieDto movieDto) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response create(@Valid MovieDto movieDto){
         var movie = movieRepository.add(MovieDto.map(movieDto));
-        return Response.created(URI.create("movies/" + movie.getId().toString())).build();
+        return Response.created(URI.create("movies/" + movie.getUuid())).build();
     }
 
 
