@@ -33,13 +33,7 @@ public class Movie implements Serializable {
     @Column(name = "genre", length = 20)
     private String genre;
 
-//    public Integer getId() {
-//        return id;
-//    }
 
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     public UUID getUuid(){
         return uuid;
