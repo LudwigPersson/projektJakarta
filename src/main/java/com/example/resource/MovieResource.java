@@ -65,4 +65,13 @@ public class MovieResource {
         return Response.created(URI.create("movies/" + uuid)).build();
     }
 
+    @DELETE
+    @Path("/{uuid}")
+    public Response delete(@PathParam("uuid") UUID uuid) {
+        Response movie = movieRepository.deleteByUuid(uuid);
+        if (!movie.equals(uuid)){
+            throw new NotFoundException("UUID not valid " + uuid);
+        }
+        return Response.ok("Successfully deleted").build();
+    }
 }
