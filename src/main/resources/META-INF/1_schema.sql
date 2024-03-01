@@ -1,3 +1,5 @@
+USE movies;
+
 CREATE TABLE movie (
     id INT AUTO_INCREMENT PRIMARY KEY,
     uuid BINARY(16) NOT NULL UNIQUE,

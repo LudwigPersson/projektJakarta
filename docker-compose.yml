@@ -10,6 +10,8 @@ services:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
+      - ./src/main/resources/META-INF/1_schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
+      - ./src/main/resources/META-INF/2_data.sql:/docker-entrypoint-initdb.d/2_data.sql
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-ppassword" ]
       interval: 5s
