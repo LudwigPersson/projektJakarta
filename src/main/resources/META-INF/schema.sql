@@ -1,6 +1,4 @@
-USE movies;
-
-CREATE TABLE IF NOT EXISTS movie (
+CREATE TABLE movie (
     id INT AUTO_INCREMENT PRIMARY KEY,
     uuid BINARY(16) NOT NULL UNIQUE,
     title VARCHAR(100) NOT NULL,
@@ -11,4 +9,3 @@ CREATE TABLE IF NOT EXISTS movie (
 );
 
 CREATE INDEX idx_uuid ON movie (uuid);
-
