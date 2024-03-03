@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
@@ -8,11 +9,18 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name = "movie", schema = "movies")
+@Table(name = "movie", schema = "movies",
+    indexes = @Index(name = "idx_uuid", columnList = "uuid", unique = true))
 public class Movie implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "uuid", nullable = false,updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "uuid", nullable = false,updatable = false, unique = true, columnDefinition = "BINARY(16)")
     private UUID uuid;
 
     @Size(max = 100)
