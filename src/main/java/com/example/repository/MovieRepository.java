@@ -70,4 +70,8 @@ public class MovieRepository implements Serializable {
                 .build();
         }
     }
+    @Transactional
+    public void deleteAllMovies() {
+        entityManager.createQuery("DELETE FROM Movie").executeUpdate();
+    }
 }

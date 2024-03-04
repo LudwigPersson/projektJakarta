@@ -71,6 +71,19 @@ public class MovieResource {
             .build();
     }
 
+    @DELETE
+    @Path("/deleteAll")
+    public Response deleteAllMovies() {
+        try {
+            movieRepository.deleteAllMovies();
+            return Response.noContent().build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("Failed to delete all movies")
+                .build();
+        }
+    }
+
     @PUT
     @Path("/{uuid}")
     @Consumes(MediaType.APPLICATION_JSON)
