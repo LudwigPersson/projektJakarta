@@ -64,4 +64,10 @@ public class MovieRepository implements Serializable {
         Movie movie = getByUuid(uuid).get();
         entityManager.remove(movie);
     }
+
+    @Transactional
+    public void deleteAllMovies() {
+        entityManager.createQuery("DELETE FROM " + Movie.class.getName()).executeUpdate();
+    }
+
 }
